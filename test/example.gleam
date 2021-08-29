@@ -1,5 +1,4 @@
 import glow_server/core
-import gleam/io
 import gleam/string
 
 pub type ExampleRequestType {

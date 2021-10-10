@@ -26,12 +26,14 @@ defmodule GlowServer do
       def cast(pid, request), do: GenServer.cast(pid, request)
 
       @impl GenServer
+      @spec handle_call(__MODULE__.glow_req_t(), GenServer.from(), __MODULE__.glow_state_t()) :: any()
       def handle_call(request, _from, state),
         do:
           :glow_server@core.build_call(request, state)
           |> unquote(server).dispatch
 
       @impl GenServer
+      @spec handle_cast(__MODULE__.glow_req_t(), __MODULE__.glow_state_t()) :: any()
       def handle_cast(request, state),
         do:
           :glow_server@core.build_cast(request, state)

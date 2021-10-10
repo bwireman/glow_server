@@ -15,6 +15,9 @@ defmodule ExampleGlowServer do
   # the response type returned by the server
   @type glow_resp_t :: String.t()
 
+  # the internal state type of the server
+  @type glow_state_t :: String.t()
+
   def start_link(_), do: GenServer.start_link(__MODULE__, "initial-state", name: __MODULE__)
 
   def init(init_arg), do: {:ok, init_arg}

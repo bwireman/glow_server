@@ -16,11 +16,8 @@ pub fn dispatch(
 
     core.Cast(Reverse, state) -> core.build_noreply(string.reverse(state))
 
-    core.Call(Concat(s), state) -> {
-      let resp = string.concat([s, state])
-      let new_state = s
-      core.build_reply(resp, new_state)
-    }
+    core.Call(Concat(s), state) ->
+      core.build_reply(string.concat([s, state]), s)
 
     core.Cast(Set(s), _state) -> core.build_noreply(s)
   }

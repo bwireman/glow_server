@@ -18,22 +18,23 @@ defmodule GlowServer do
     quote bind_quoted: [server: server] do
       use GenServer
 
-      @spec call(GenServer.server(), __MODULE__.glow_req_t(), integer()) ::
-              __MODULE__.glow_resp_t()
+      @spec call(GenServer.server(), unquote(server).request(), integer()) ::
+              unquote(server).response()
       def call(pid, request, timeout \\ 5), do: GenServer.call(pid, request, timeout)
 
-      @spec cast(GenServer.server(), __MODULE__.glow_req_t()) :: __MODULE__.glow_resp_t()
+      @spec cast(GenServer.server(), unquote(server).request()) :: unquote(server).response()
       def cast(pid, request), do: GenServer.cast(pid, request)
 
       @impl GenServer
-      @spec handle_call(__MODULE__.glow_req_t(), GenServer.from(), __MODULE__.glow_state_t()) :: any()
+      @spec handle_call(unquote(server).request(), GenServer.from(), unquote(server).state()) ::
+              any()
       def handle_call(request, _from, state),
         do:
           :glow_server@core.build_call(request, state)
           |> unquote(server).dispatch
 
       @impl GenServer
-      @spec handle_cast(__MODULE__.glow_req_t(), __MODULE__.glow_state_t()) :: any()
+      @spec handle_cast(unquote(server).request(), unquote(server).state()) :: any()
       def handle_cast(request, state),
         do:
           :glow_server@core.build_cast(request, state)

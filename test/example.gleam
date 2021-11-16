@@ -1,16 +1,22 @@
 import glow_server/core
 import gleam/string
 
-pub type ExampleRequestType {
+pub type Request {
   Read
   Reverse
   Concat(String)
   Set(String)
 }
 
+pub type Response =
+  String
+
+pub type State =
+  String
+
 pub fn dispatch(
-  request: core.Request(ExampleRequestType, String),
-) -> core.Response(String, String) {
+  request: core.Request(Request, State),
+) -> core.Response(Response, State) {
   case request {
     core.Call(Read, state) -> core.build_reply(state, state)
 

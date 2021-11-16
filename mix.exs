@@ -21,8 +21,8 @@ defmodule GlowServer.MixProject do
 
   defp deps do
     [
-      {:gleam_stdlib, "~> 0.16.0"},
-      {:mix_gleam, "~> 0.1.0"},
+      {:gleam_stdlib, "~> 0.17.0"},
+      {:mix_gleam, "~> 0.1.0"}
     ]
   end
 end

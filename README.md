@@ -29,7 +29,7 @@ The `GlowServer.__using__` macro takes in the name of the implementing server an
 `call` & `cast` which are forwarded to the server's `dispatch` function  
 
 
-```rust
+```gleam
 // core logic in gleam
 import glow_server/core
 import gleam/string
